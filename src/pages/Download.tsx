@@ -19,7 +19,7 @@ const Download: React.FC = () => {
   const postExample = `curl -X POST "${baseUrl}/api/download" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "link": "https://1024terabox.com/s/1abc123def456",
+    "link": "https://dm.1024terabox.com/s/1abc123def456",
     "cookies": "ndus=YourCookieValueHere"
   }'`;
 
@@ -30,7 +30,7 @@ const response = await fetch('${baseUrl}/api/download', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    link: 'https://1024terabox.com/s/1abc123def456',
+    link: 'https://dm.1024terabox.com/s/1abc123def456',
     cookies: 'ndus=YourCookieValueHere'
   })
 });
@@ -43,7 +43,7 @@ import requests
 
 url = "${baseUrl}/api/download"
 payload = {
-    "link": "https://1024terabox.com/s/1abc123def456",
+    "link": "https://dm.1024terabox.com/s/1abc123def456",
     "cookies": "ndus=YourCookieValueHere"
 }
 
@@ -57,7 +57,7 @@ print(data)`;
   "thumbnail": "https://thumbnail-url.com/thumb.jpg",
   "file_size": "125.50 MB",
   "size_bytes": 131621888,
-  "proxy_url": "https://terabox.ashlynn.workers.dev/proxy?url=encoded_url&file_name=example_file.zip&cookie=encoded_cookie"
+  "proxy_url": "https://terabox-api.tellycloudapi.workers.dev/proxy?url=encoded_url&file_name=example_file.zip&cookie=encoded_cookie"
 }`;
 
   const errorExample = `{
@@ -419,7 +419,7 @@ print(data)`;
               
               <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-2">proxy_url</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300">External proxy download URL (https://terabox.ashlynn.workers.dev/proxy)</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">External proxy download URL (https://terabox-api.tellycloudapi.workers.dev/proxy)</p>
               </div>
             </div>
           </div>
@@ -469,7 +469,7 @@ print(data)`;
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-lg p-3 sm:p-4">
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm sm:text-base">External Proxy</h4>
-                <code className="text-xs sm:text-sm text-purple-600 dark:text-purple-400 break-all block overflow-x-auto">https://terabox.ashlynn.workers.dev/proxy</code>
+                <code className="text-xs sm:text-sm text-purple-600 dark:text-purple-400 break-all block overflow-x-auto">https://terabox-api.tellycloudapi.workers.dev/proxy</code>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">

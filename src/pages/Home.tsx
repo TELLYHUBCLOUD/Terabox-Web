@@ -138,7 +138,7 @@ const Home: React.FC = () => {
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="https://terabox.com/s/... or https://1024terabox.com/s/..."
+                  placeholder="https://terabox.com/s/... or https://dm.1024terabox.com/s/..."
                   className="w-full px-4 sm:px-5 py-3 sm:py-4 pl-12 sm:pl-14 pr-4 border-2 border-gray-300 dark:border-gray-600 rounded-xl sm:rounded-2xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-4 focus:ring-blue-500/30 focus:border-blue-500 transition-all duration-300 group-hover:shadow-lg focus:shadow-xl text-sm sm:text-base"
                   disabled={loading}
                 />

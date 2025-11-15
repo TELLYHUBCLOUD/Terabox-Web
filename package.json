@@ -4,14 +4,14 @@
   "version": "2.0.1",
   "description": "Professional TeraBox file downloader with modern web interface",
   "author": {
-    "name": "Ashlynn",
-    "url": "https://t.me/Ashlynn_Repository"
+    "name": "TellYHuB",
+    "url": "https://t.me/tellyhub"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Itz-Ashlynn/Terabox-Web.git"
+    "url": "https://github.com/Itz-TellYHuB/Terabox-Web.git"
   },
-  "homepage": "https://github.com/Itz-Ashlynn/Terabox-Web#readme",
+  "homepage": "https://github.com/Itz-TellYHuB/Terabox-Web#readme",
   "keywords": [
     "terabox",
     "downloader",

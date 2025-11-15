@@ -7,7 +7,7 @@ function getHeaders(cookie) {
     "Accept-Language": "en-US,en;q=0.9,hi;q=0.8",
     "Connection": "keep-alive",
     "DNT": "1",
-    "Host": "www.1024terabox.com",
+    "Host": "www.dm.1024terabox.com",
     "Upgrade-Insecure-Requests": "1",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0",
     "sec-ch-ua": '"Microsoft Edge";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
@@ -88,7 +88,7 @@ async function getFileInfo(link, event, cookie) {
       root: "1,",
     });
 
-    response = await fetch(`https://www.1024terabox.com/share/list?${params}`, { headers });
+    response = await fetch(`https://www.dm.1024terabox.com/share/list?${params}`, { headers });
     const data = await response.json();
 
     if (!data || !data.list || !data.list.length || data.errno) {
@@ -105,7 +105,7 @@ async function getFileInfo(link, event, cookie) {
       thumbnail: fileInfo.thumbs?.url3 || "",
       file_size: getSize(parseInt(fileInfo.size || 0)),
       size_bytes: parseInt(fileInfo.size || 0),
-      proxy_url: `https://terabox.ashlynn.workers.dev/proxy?url=${encodeURIComponent(fileInfo.dlink)}&file_name=${encodeURIComponent(fileInfo.server_filename || 'download')}&cookie=${encodeURIComponent(cookie)}`,
+      proxy_url: `https://terabox-api.tellycloudapi.workers.dev/proxy?url=${encodeURIComponent(fileInfo.dlink)}&file_name=${encodeURIComponent(fileInfo.server_filename || 'download')}&cookie=${encodeURIComponent(cookie)}`,
     };
   } catch (error) {
     console.error("Error in getFileInfo:", error.message);

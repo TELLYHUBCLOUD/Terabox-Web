@@ -11,7 +11,7 @@
 
 **Fast, secure, and reliable file downloads from TeraBox with no limits.**
 
-[🌐 Live Demo](https://terasnap.netlify.app/) • [📖 Documentation](https://terasnap.netlify.app/download) • [🐙 GitHub](https://github.com/Itz-Ashlynn/Terabox-Web)
+[🌐 Live Demo](https://terasnap.netlify.app/) • [📖 Documentation](https://terasnap.netlify.app/download) • [🐙 GitHub](https://github.com/Itz-TellYHuB/Terabox-Web)
 
 </div>
 
@@ -41,7 +41,7 @@ Visit **[https://terasnap.netlify.app/](https://terasnap.netlify.app/)** to star
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Itz-Ashlynn/Terabox-Web.git
+git clone https://github.com/Itz-TellYHuB/Terabox-Web.git
 cd Terabox-Web
 
 # 2. Install dependencies
@@ -114,7 +114,7 @@ npm run dev
 
 3. **📎 Enter TeraBox URL**
    - Paste your TeraBox share link in the input field
-   - Example: `https://1024terabox.com/s/1abc123def456`
+   - Example: `https://dm.1024terabox.com/s/1abc123def456`
 
 4. **⬇️ Download Your File**
    - Choose between direct download or proxy download
@@ -132,7 +132,7 @@ https://terasnap.netlify.app
 curl -X POST "https://terasnap.netlify.app/api/download" \
   -H "Content-Type: application/json" \
   -d '{
-    "link": "https://1024terabox.com/s/1abc123def456",
+    "link": "https://dm.1024terabox.com/s/1abc123def456",
     "cookies": "ndus=YourCookieValueHere"
   }'
 ```
@@ -145,7 +145,7 @@ curl -X POST "https://terasnap.netlify.app/api/download" \
   "thumbnail": "https://thumbnail-url.com/thumb.jpg",
   "file_size": "125.50 MB",
   "size_bytes": 131621888,
-  "proxy_url": "https://terabox.ashlynn.workers.dev/proxy?url=encoded_url&file_name=example_file.zip&cookie=encoded_cookie"
+  "proxy_url": "https://terabox-api.tellycloudapi.workers.dev/proxy?url=encoded_url&file_name=example_file.zip&cookie=encoded_cookie"
 }
 ```
 
@@ -256,7 +256,7 @@ curl -X POST "https://terasnap.netlify.app/api/download" \
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/Itz-Ashlynn/Terabox-Web.git
+   git clone https://github.com/Itz-TellYHuB/Terabox-Web.git
    cd Terabox-Web
    ```
 
@@ -321,7 +321,7 @@ yarn build
 ### 🚀 Netlify Deployment (Recommended)
 
 1. **Fork Repository**
-   - Click "Fork" on [GitHub](https://github.com/Itz-Ashlynn/Terabox-Web)
+   - Click "Fork" on [GitHub](https://github.com/Itz-TellYHuB/Terabox-Web)
 
 2. **Connect to Netlify**
    - Login to [Netlify](https://netlify.com)
@@ -394,14 +394,14 @@ We welcome contributions! Here's how you can help:
 1. **📖 Check Documentation** - Most common issues are covered here
 2. **🔍 Search Issues** - Someone might have already reported it
 3. **🐛 Create Issue** - Provide detailed information about the problem
-4. **💬 Contact Author** - Reach out to [Ashlynn](https://t.me/Ashlynn_Repository)
+4. **💬 Contact Author** - Reach out to [TellYHuB](https://t.me/tellyhub)
 
 ### 🔗 Useful Links
 
 - **🌐 Live Website**: [https://terasnap.netlify.app/](https://terasnap.netlify.app/)
 - **📖 API Documentation**: [https://terasnap.netlify.app/download](https://terasnap.netlify.app/download)
-- **🐙 GitHub Repository**: [https://github.com/Itz-Ashlynn/Terabox-Web](https://github.com/Itz-Ashlynn/Terabox-Web)
-- **📞 Contact Author**: [https://t.me/Ashlynn_Repository](https://t.me/Ashlynn_Repository)
+- **🐙 GitHub Repository**: [https://github.com/Itz-TellYHuB/Terabox-Web](https://github.com/Itz-TellYHuB/Terabox-Web)
+- **📞 Contact Author**: [https://t.me/tellyhub](https://t.me/tellyhub)
 
 ---
 
@@ -412,7 +412,7 @@ This project is licensed under the **MIT License**.
 ```
 MIT License
 
-Copyright (c) 2025 TeraBox Web - Ashlynn
+Copyright (c) 2025 TeraBox Web - TellYHuB
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -449,8 +449,8 @@ SOFTWARE.
 
 **⭐ Star this repository if you found it helpful! ⭐**
 
-Made with ❤️ by [Ashlynn](https://t.me/Ashlynn_Repository)
+Made with ❤️ by [TellYHuB](https://t.me/tellyhub)
 
-[🌐 Live Demo](https://terasnap.netlify.app/) • [🐙 GitHub](https://github.com/Itz-Ashlynn/Terabox-Web) • [📞 Contact](https://t.me/Ashlynn_Repository)
+[🌐 Live Demo](https://terasnap.netlify.app/) • [🐙 GitHub](https://github.com/Itz-TellYHuB/Terabox-Web) • [📞 Contact](https://t.me/tellyhub)
 
 </div>

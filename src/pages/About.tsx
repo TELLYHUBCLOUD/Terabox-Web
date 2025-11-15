@@ -126,16 +126,16 @@ const About: React.FC = () => {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Made with Love</h2>
         </div>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          This project is developed and maintained by the Ashlynn Repository.
+          This project is developed and maintained by the TellYHuB Repository.
         </p>
         <a
-          href="https://t.me/Ashlynn_Repository"
+          href="https://t.me/tellyhub"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
         >
           <ExternalLink className="h-5 w-5" />
-          <span>Visit Ashlynn Repository</span>
+          <span>Visit TellYHuB Repository</span>
         </a>
       </div>
     </div>
