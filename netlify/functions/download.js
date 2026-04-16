@@ -2,22 +2,22 @@ const DEFAULT_COOKIE = "ndus=Y2YqaCTteHuiU3Ud_MYU7vHoVW4DNBi0MPmg_1tQ" // Fallba
 
 function getHeaders(cookie) {
   return {
-    "Accept": "application/json, text/plain, */*",
-    "Accept-Encoding": "gzip, deflate, br", 
-    "Accept-Language": "en-US,en;q=0.9,hi;q=0.8",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cache-Control": "max-age=0",
     "Connection": "keep-alive",
-    "DNT": "1",
-    "Host": "www.dm.1024terabox.com",
-    "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0",
-    "sec-ch-ua": '"Microsoft Edge";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
+    "Cookie": cookie || DEFAULT_COOKIE,
+    "Host": "www.teraboxapp.com",
+    "Sec-Ch-Ua": '"Not(A:Brand";v="99", "Microsoft Edge";v="133", "Chromium";v="133"',
+    "Sec-Ch-Ua-Mobile": "?0",
+    "Sec-Ch-Ua-Platform": '"Windows"',
     "Sec-Fetch-Dest": "document",
     "Sec-Fetch-Mode": "navigate",
     "Sec-Fetch-Site": "none",
     "Sec-Fetch-User": "?1",
-    "Cookie": cookie || DEFAULT_COOKIE,
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": '"Windows"',
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0"
   };
 }
 
@@ -37,6 +37,38 @@ function findBetween(str, start, end) {
   const endIndex = str.indexOf(end, startIndex);
   if (startIndex === -1 || endIndex === -1) return "";
   return str.slice(startIndex, endIndex);
+}
+
+function extractTokens(text) {
+  const jsTokenMatch = text.match(/fn%28%22([^%]+)%22%29/) || 
+                       text.match(/jsToken\s*=\s*"([^"]+)"/) ||
+                       text.match(/fn\("([^"]+)"\)/);
+  
+  const bdsTokenMatch = text.match(/bdstoken":"([^"]+)"/) ||
+                        text.match(/bdstoken\s*=\s*"([^"]+)"/);
+                        
+  const logidMatch = text.match(/dp-logid=([^&" ]+)/) ||
+                     text.match(/"dp-logid":"([^"]+)"/);
+
+  let jsToken = jsTokenMatch ? jsTokenMatch[1] : "";
+  let bdsToken = bdsTokenMatch ? bdsTokenMatch[1] : "";
+  let logid = logidMatch ? logidMatch[1] : "";
+
+  // Try to find in templateData if JSON
+  if (!bdsToken || !logid) {
+    const templateMatch = text.match(/var\s+templateData\s*=\s*({.+?});/);
+    if (templateMatch) {
+        try {
+            const dataStr = templateMatch[1];
+            const bdsMatch = dataStr.match(/"bdstoken":"([^"]+)"/);
+            const logidMatchJson = dataStr.match(/"dp-logid":"([^"]+)"/);
+            if (bdsMatch) bdsToken = bdsToken || bdsMatch[1];
+            if (logidMatchJson) logid = logid || logidMatchJson[1];
+        } catch (e) {}
+    }
+  }
+
+  return { jsToken, bdsToken, logid };
 }
 
 async function getFileInfo(link, event, cookie) {
@@ -63,12 +95,10 @@ async function getFileInfo(link, event, cookie) {
     response = await fetch(finalUrl, { headers });
     const text = await response.text();
 
-    const jsToken = findBetween(text, 'fn%28%22', '%22%29');
-    const logid = findBetween(text, 'dp-logid=', '&');
-    const bdstoken = findBetween(text, 'bdstoken":"', '"');
+    const { jsToken, bdsToken, logid } = extractTokens(text);
 
-    if (!jsToken || !logid || !bdstoken) {
-      console.error("Failed to extract tokens:", { jsToken: !!jsToken, logid: !!logid, bdstoken: !!bdstoken });
+    if (!jsToken || !logid || !bdsToken) {
+      console.error("Failed to extract tokens (Enhanced):", { jsToken: !!jsToken, logid: !!logid, bdstoken: !!bdsToken });
       return { error: "Authentication failed. Please check your cookies and try again." };
     }
 
@@ -88,7 +118,8 @@ async function getFileInfo(link, event, cookie) {
       root: "1,",
     });
 
-    response = await fetch(`https://www.dm.1024terabox.com/share/list?${params}`, { headers });
+    const listApiUrl = `https://www.teraboxapp.com/share/list?${params}`;
+    response = await fetch(listApiUrl, { headers });
     const data = await response.json();
 
     if (!data || !data.list || !data.list.length || data.errno) {
@@ -97,7 +128,6 @@ async function getFileInfo(link, event, cookie) {
     }
 
     const fileInfo = data.list[0];
-    const baseUrl = `https://${event.headers.host}`;
     
     return {
       file_name: fileInfo.server_filename || "",
@@ -105,7 +135,7 @@ async function getFileInfo(link, event, cookie) {
       thumbnail: fileInfo.thumbs?.url3 || "",
       file_size: getSize(parseInt(fileInfo.size || 0)),
       size_bytes: parseInt(fileInfo.size || 0),
-      proxy_url: `https://terabox-api.tellycloudapi.workers.dev/proxy?url=${encodeURIComponent(fileInfo.dlink)}&file_name=${encodeURIComponent(fileInfo.server_filename || 'download')}&cookie=${encodeURIComponent(cookie)}`,
+      proxy_url: `/api/proxy?url=${encodeURIComponent(fileInfo.dlink)}&filename=${encodeURIComponent(fileInfo.server_filename || 'download')}&cookie=${encodeURIComponent(cookie)}`,
     };
   } catch (error) {
     console.error("Error in getFileInfo:", error.message);
